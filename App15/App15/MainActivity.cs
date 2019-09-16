@@ -10,7 +10,7 @@ using System;
 namespace App15
 {
 
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "GroepIndeling", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -30,35 +30,16 @@ namespace App15
 
             };
 
-            SensorSpeed speed = SensorSpeed.Game;
-                Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
 
+            Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
 
             void Accelerometer_ShakeDetected(object sender, EventArgs e)
             {
                 textview.Text = string.Empty;
+                Accelerometer.Stop();
             }
 
-
-
-            void ToggleAccelerometer()
-            {
-                try
-                {
-                    if (Accelerometer.IsMonitoring)
-                        Accelerometer.Stop();
-                    else
-                        Accelerometer.Start(speed);
-                }
-                catch (FeatureNotSupportedException fnsEx)
-                {
-                    // Feature not supported on device
-                }
-                catch (Exception ex)
-                {
-                    // Other error has occurred.
-                }
-            }
+            
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
