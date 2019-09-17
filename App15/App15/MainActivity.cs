@@ -44,7 +44,7 @@ namespace App15
                         Console.WriteLine("  -" + student.Name);
                     }
                 }
-                //textview.Text = edittext.Text;
+                textview.Text = responseString;
 
             };
 
