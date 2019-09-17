@@ -12,6 +12,7 @@ using System.Net;
 using System.IO;
 using System.Collections.Generic;
 
+
 namespace App15
 {
 
@@ -19,31 +20,23 @@ namespace App15
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
-        {
+        { 
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
             var edittext = FindViewById<EditText>(Resource.Id.edittext);
             var textview = FindViewById<TextView>(Resource.Id.Textview);
-            var ButtonOne = FindViewById<Button>(Resource.Id.button1);
-
+            var ButtonOne = FindViewById<Android.Widget.Button>(Resource.Id.button1);
 
             ButtonOne.Click += (sender, e) =>
             {
                 string number1 = Convert.ToString(edittext.Text);
                 int number2 = Convert.ToInt32(number1);
                 string responseString = GetStudentGroups(number2);
+             
 
-                var groups = JsonConvert.DeserializeObject<List<Group>>(responseString);
-                foreach (var group in groups)
-                {
-                    Console.WriteLine(group.GroupNumber);
-                    foreach (var student in group.Students)
-                    {
-                        Console.WriteLine("  -" + student.Name);
-                    }
-                }
+                
                 textview.Text = responseString;
 
             };
