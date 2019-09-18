@@ -13,7 +13,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:id="@+id/edittext"
-        android:maxLength="1" 
+        android:maxLength="1"
+        android:textColor="#ff000000" 
         />
     <Button
         android:text="Groep indelen"
@@ -34,4 +35,13 @@
         android:onClick="editText1"
         android:scrollHorizontally="false"
         android:id="@+id/Textview"/>
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="290dp"
+        android:id="@+id/button2"
+        android:text="Darkmode" 
+ />
+
 </RelativeLayout>
