@@ -6,13 +6,9 @@ using Android.Widget;
 using Android.Views;
 using Xamarin.Essentials;
 using System;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 using System.Drawing;
 using Android.Content;
-=======
-=======
->>>>>>> 9641f23a806ba809d42581f3915e0556de5a0480
 using Newtonsoft.Json;
 using System.Runtime.Serialization.Json;
 using System.Net;
@@ -35,16 +31,14 @@ namespace App15
             if ("A".Equals(Intent.GetStringExtra("Theme")))
             {
                 SetTheme(Resource.Style.AppThemeA);
-         
+
             }
             else if ("B".Equals(Intent.GetStringExtra("Theme")))
             {
                 SetTheme(Resource.Style.AppTheme);
             }
 
-        { 
 
-        { 
 
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -54,35 +48,27 @@ namespace App15
             var textview = FindViewById<TextView>(Resource.Id.Textview);
 
             Button Buttontwo = FindViewById<Button>(Resource.Id.button2);
-            Button ButtonOne = FindViewById<Button>(Resource.Id.button1);
-          
-
-
-                ButtonOne.Click += (sender, e) =>
-            {
-                textview.Text = edittext.Text;
-             
-       var ButtonOne = FindViewById<Android.Widget.Button>(Resource.Id.button1);
+            Button ButtonOne = FindViewById<Android.Widget.Button>(Resource.Id.button1);
 
             ButtonOne.Click += (sender, e) =>
             {
                 string number1 = Convert.ToString(edittext.Text);
                 int number2 = Convert.ToInt32(number1);
                 string responseString = GetStudentGroups(number2);
-             
 
-                
+
                 textview.Text = responseString;
 
             };
 
             Buttontwo.Click += (sender, e) =>
             {
-                if(Buttontwo.Text == "Darkmode") {
+                if (Buttontwo.Text == "Darkmode")
+                {
 
                     Intent intent = new Intent(this, typeof(MainActivity));
                     intent.PutExtra("Theme", "A");
-                  //  intent.PutExtra("Mode", "lightmode"); 
+                    //  intent.PutExtra("Mode", "lightmode"); 
                     StartActivity(intent);
                     Finish();
                 }
@@ -90,11 +76,11 @@ namespace App15
                 {
                     Intent intent = new Intent(this, typeof(MainActivity));
                     intent.PutExtra("Theme", "B");
-                  //  intent.PutExtra("Mode", "Darkmode");
+                    //  intent.PutExtra("Mode", "Darkmode");
                     StartActivity(intent);
                     Finish();
                 }
-               
+
 
             };
 
@@ -141,10 +127,7 @@ namespace App15
 
 
 
-
-
-
-
     }
+
+ }
   
-}
