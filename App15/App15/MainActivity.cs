@@ -7,16 +7,19 @@ using Android.Views;
 using Xamarin.Essentials;
 using System;
 <<<<<<< HEAD
+<<<<<<< HEAD
 using System.Drawing;
 using Android.Content;
 =======
+=======
+>>>>>>> 9641f23a806ba809d42581f3915e0556de5a0480
 using Newtonsoft.Json;
 using System.Runtime.Serialization.Json;
 using System.Net;
 using System.IO;
 using System.Collections.Generic;
 
->>>>>>> 9641f23a806ba809d42581f3915e0556de5a0480
+
 
 namespace App15
 {
@@ -26,7 +29,7 @@ namespace App15
     {
 
         protected override void OnCreate(Bundle savedInstanceState)
-<<<<<<< HEAD
+
         {
 
             if ("A".Equals(Intent.GetStringExtra("Theme")))
@@ -39,16 +42,17 @@ namespace App15
                 SetTheme(Resource.Style.AppTheme);
             }
 
-=======
         { 
->>>>>>> 9641f23a806ba809d42581f3915e0556de5a0480
+
+        { 
+
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource     
             SetContentView(Resource.Layout.activity_main);
             var edittext = FindViewById<EditText>(Resource.Id.edittext);
             var textview = FindViewById<TextView>(Resource.Id.Textview);
-<<<<<<< HEAD
+
             Button Buttontwo = FindViewById<Button>(Resource.Id.button2);
             Button ButtonOne = FindViewById<Button>(Resource.Id.button1);
           
@@ -58,8 +62,7 @@ namespace App15
             {
                 textview.Text = edittext.Text;
              
-=======
-            var ButtonOne = FindViewById<Android.Widget.Button>(Resource.Id.button1);
+       var ButtonOne = FindViewById<Android.Widget.Button>(Resource.Id.button1);
 
             ButtonOne.Click += (sender, e) =>
             {
@@ -71,7 +74,6 @@ namespace App15
                 
                 textview.Text = responseString;
 
->>>>>>> 9641f23a806ba809d42581f3915e0556de5a0480
             };
 
             Buttontwo.Click += (sender, e) =>
@@ -96,10 +98,7 @@ namespace App15
 
             };
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 9641f23a806ba809d42581f3915e0556de5a0480
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -109,9 +108,6 @@ namespace App15
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-<<<<<<< HEAD
- 
-=======
         private static string GetStudentGroups(int size)
         {
             var request = WebRequest.Create("https://classdivider.azurewebsites.net/api/GetStudentGroups?code=8QhjS0G4vDQIM2IatwNjZjWxfLOXWei0XcwyO/2htLhC20qQD15nDg==");
@@ -149,7 +145,6 @@ namespace App15
 
 
 
->>>>>>> 9641f23a806ba809d42581f3915e0556de5a0480
     }
   
 }
