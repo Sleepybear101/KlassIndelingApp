@@ -38,17 +38,26 @@ namespace App15
                 SetTheme(Resource.Style.AppTheme);
             }
 
-
-
-            base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource     
-            SetContentView(Resource.Layout.activity_main);
+           base.OnCreate(savedInstanceState);
+           SetContentView(Resource.Layout.activity_main);
+
             var edittext = FindViewById<EditText>(Resource.Id.edittext);
             var textview = FindViewById<TextView>(Resource.Id.Textview);
 
             Button Buttontwo = FindViewById<Button>(Resource.Id.button2);
             Button ButtonOne = FindViewById<Android.Widget.Button>(Resource.Id.button1);
+
+            if ("lightmode".Equals(Intent.GetStringExtra("Mode")))
+            {
+                Buttontwo.Text = Intent.GetStringExtra("Mode");
+                edittext.SetTextColor(Android.Graphics.Color.White);
+                textview.SetTextColor(Android.Graphics.Color.White);
+            }
+
+
+
 
             ButtonOne.Click += (sender, e) =>
             {
@@ -58,17 +67,18 @@ namespace App15
 
 
                 textview.Text = responseString;
-
             };
 
-            Buttontwo.Click += (sender, e) =>
+
+                Buttontwo.Click += (sender, e) =>
             {
+
                 if (Buttontwo.Text == "Darkmode")
                 {
 
                     Intent intent = new Intent(this, typeof(MainActivity));
                     intent.PutExtra("Theme", "A");
-                    //  intent.PutExtra("Mode", "lightmode"); 
+                    intent.PutExtra("Mode", "lightmode");
                     StartActivity(intent);
                     Finish();
                 }
@@ -76,7 +86,7 @@ namespace App15
                 {
                     Intent intent = new Intent(this, typeof(MainActivity));
                     intent.PutExtra("Theme", "B");
-                    //  intent.PutExtra("Mode", "Darkmode");
+     
                     StartActivity(intent);
                     Finish();
                 }
