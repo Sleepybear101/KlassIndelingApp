@@ -46,7 +46,7 @@ namespace App15
             var edittext = FindViewById<EditText>(Resource.Id.edittext);
             var textview = FindViewById<TextView>(Resource.Id.Textview);
 
-            Button Buttontwo = FindViewById<Button>(Resource.Id.button2);
+            Button Buttontwo = FindViewById<Android.Widget.Button>(Resource.Id.button2);
             Button ButtonOne = FindViewById<Android.Widget.Button>(Resource.Id.button1);
 
             if ("lightmode".Equals(Intent.GetStringExtra("Mode")))
