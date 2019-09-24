@@ -6,7 +6,6 @@ using Android.Widget;
 using Android.Views;
 using Xamarin.Essentials;
 using System;
-
 using System.Drawing;
 using Android.Content;
 using Newtonsoft.Json;
@@ -24,8 +23,7 @@ namespace App15
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
-        {
-            var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
+        {             
 
             if ("A".Equals(Intent.GetStringExtra("Theme")))
             {
@@ -49,32 +47,47 @@ namespace App15
             if ("lightmode".Equals(Intent.GetStringExtra("Mode")))
             {
                 Buttontwo.Text = Intent.GetStringExtra("Mode");
-                edittext.SetTextColor(Android.Graphics.Color.White);
-                //NB [23/09/2019 22:16]
-                //hoi wurud, ik heb een beetje gekeken naar het aanpassen van de textcolor van die SimpleListItem1, maar heb daar helaas niks van kunnen vinden, dus is deze standaard zwart. ik weet ook niet of dit veranderd kan worden. 
+                edittext.SetTextColor(Android.Graphics.Color.White);              
             }
 
             ButtonOne.Click += (sender, e) =>
             {
-                //var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
-                List<string> student_name = new List<string>();
                 string number1 = Convert.ToString(edittext.Text);
                 int number2 = Convert.ToInt32(number1);
-                string responseString = GetStudentGroups(number2);
-                var groups = JsonConvert.DeserializeObject<List<Group>>(responseString);
-                // go through all the groups and seperate them
-                foreach (var group in groups)
+                if (number2 < 1)
                 {
-                    // go through all the students in the different groups and seperate them
-                    foreach (var student in group.Students)
+                    Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this);
+                    builder.SetTitle("ERROR");
+                    builder.SetMessage("You cannot enter a value below 1");
+                    builder.SetNeutralButton("OK", delegate
                     {
-                        // Set groupname + student name + student surname in list
-                        student_name.Add(group.GroupNumber + " " + student.Name + " " + student.SurName);
-                        //adding the list into seperate listitems for the listview
-                        var adapter2 = new ArrayAdapter<string>(this,
-                        Android.Resource.Layout.SimpleListItem1, student_name);
-                        //viewing the seperate list-items
-                        lst_groups.Adapter = adapter2;
+                        builder.Dispose();
+                    });
+                    builder.Show();
+                }
+                else
+                {
+
+
+                    //var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
+                    List<string> student_name = new List<string>();
+                    string responseString = GetStudentGroups(number2);
+                    var groups = JsonConvert.DeserializeObject<List<Group>>(responseString);
+                    var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
+                    // go through all the groups and seperate them
+                    foreach (var group in groups)
+                    {
+                        // go through all the students in the different groups and seperate them
+                        foreach (var student in group.Students)
+                        {
+                            // Set groupname + student name + student surname in list
+                            student_name.Add(group.GroupNumber + " " + student.Name + " " + student.SurName);
+                            //adding the list into seperate listitems for the listview
+                            var adapter = new ArrayAdapter<string>(this,
+                            Android.Resource.Layout.SimpleListItem1, student_name);
+                            //viewing the seperate list-items
+                            lst_groups.Adapter = adapter;
+                        }
                     }
                 }
             };
