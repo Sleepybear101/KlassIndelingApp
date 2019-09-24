@@ -23,7 +23,7 @@ namespace App15
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
-        {             
+        {
 
             if ("A".Equals(Intent.GetStringExtra("Theme")))
             {
@@ -47,18 +47,17 @@ namespace App15
             if ("lightmode".Equals(Intent.GetStringExtra("Mode")))
             {
                 Buttontwo.Text = Intent.GetStringExtra("Mode");
-                edittext.SetTextColor(Android.Graphics.Color.White);              
+                edittext.SetTextColor(Android.Graphics.Color.White);
             }
 
             ButtonOne.Click += (sender, e) =>
             {
                 string number1 = Convert.ToString(edittext.Text);
-                int number2 = Convert.ToInt32(number1);
-                if (number2 < 1)
+                if (number1.Length <= 0)
                 {
                     Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this);
                     builder.SetTitle("ERROR");
-                    builder.SetMessage("You cannot enter a value below 1");
+                    builder.SetMessage("Please enter a value");
                     builder.SetNeutralButton("OK", delegate
                     {
                         builder.Dispose();
@@ -67,26 +66,41 @@ namespace App15
                 }
                 else
                 {
+                    int number2 = Convert.ToInt32(number1);
 
 
-                    //var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
-                    List<string> student_name = new List<string>();
-                    string responseString = GetStudentGroups(number2);
-                    var groups = JsonConvert.DeserializeObject<List<Group>>(responseString);
-                    var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
-                    // go through all the groups and seperate them
-                    foreach (var group in groups)
+                    if (number2 < 1)
                     {
-                        // go through all the students in the different groups and seperate them
-                        foreach (var student in group.Students)
+                        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this);
+                        builder.SetTitle("ERROR");
+                        builder.SetMessage("You cannot enter a value below 1");
+                        builder.SetNeutralButton("OK", delegate
                         {
-                            // Set groupname + student name + student surname in list
-                            student_name.Add(group.GroupNumber + " " + student.Name + " " + student.SurName);
-                            //adding the list into seperate listitems for the listview
-                            var adapter = new ArrayAdapter<string>(this,
-                            Android.Resource.Layout.SimpleListItem1, student_name);
-                            //viewing the seperate list-items
-                            lst_groups.Adapter = adapter;
+                            builder.Dispose();
+                        });
+                        builder.Show();
+                    }
+                    else
+                    {
+                        //var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
+                        List<string> student_name = new List<string>();
+                        string responseString = GetStudentGroups(number2);
+                        var groups = JsonConvert.DeserializeObject<List<Group>>(responseString);
+                        var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
+                        // go through all the groups and seperate them
+                        foreach (var group in groups)
+                        {
+                            // go through all the students in the different groups and seperate them
+                            foreach (var student in group.Students)
+                            {
+                                // Set groupname + student name + student surname in list
+                                student_name.Add(group.GroupNumber + " " + student.Name + " " + student.SurName);
+                                //adding the list into seperate listitems for the listview
+                                var adapter = new ArrayAdapter<string>(this,
+                                Android.Resource.Layout.SimpleListItem1, student_name);
+                                //viewing the seperate list-items
+                                lst_groups.Adapter = adapter;
+                            }
                         }
                     }
                 }
@@ -111,12 +125,6 @@ namespace App15
                     Finish();
                 }
             };
-        }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
         private static string GetStudentGroups(int size)
         {
