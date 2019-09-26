@@ -48,6 +48,8 @@ namespace App15
             {
                 Buttontwo.Text = Intent.GetStringExtra("Mode");
                 edittext.SetTextColor(Android.Graphics.Color.White);
+                Buttontwo.SetTextColor(Android.Graphics.Color.Black);
+                ButtonOne.SetTextColor(Android.Graphics.Color.Black);
             }
 
             ButtonOne.Click += (sender, e) =>
@@ -84,6 +86,7 @@ namespace App15
                     {
                         //var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
                         List<string> student_name = new List<string>();
+                     
                         string responseString = GetStudentGroups(number2);
                         var groups = JsonConvert.DeserializeObject<List<Group>>(responseString);
                         var lst_groups = FindViewById<ListView>(Resource.Id.listview_groups);
@@ -96,6 +99,7 @@ namespace App15
                                 // Set groupname + student name + student surname in list
                                 student_name.Add(group.GroupNumber + " " + student.Name + " " + student.SurName);
                                 //adding the list into seperate listitems for the listview
+                                
                                 var adapter = new ArrayAdapter<string>(this,
                                 Android.Resource.Layout.SimpleListItem1, student_name);
                                 //viewing the seperate list-items
@@ -120,7 +124,6 @@ namespace App15
                 {
                     Intent intent = new Intent(this, typeof(MainActivity));
                     intent.PutExtra("Theme", "B");
-
                     StartActivity(intent);
                     Finish();
                 }

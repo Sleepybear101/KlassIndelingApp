@@ -29,7 +29,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="290dp"
         android:id="@+id/button2"
-        android:text="Darkmode" 
+        android:text="Darkmode"
+        android:layout_alignParentRight="true" 
      />
 
     <ListView
